@@ -12,6 +12,7 @@ namespace Hackathon_Jue.DB
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

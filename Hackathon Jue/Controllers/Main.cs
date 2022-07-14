@@ -36,7 +36,7 @@ namespace Hackathon_Jue.Controllers
             await _context.SaveChangesAsync();
             return Ok(team);
         }
-        
+
         [HttpPut("team/{teamId}/approved")]
         public async Task<IActionResult> ApproveUser([FromRoute] Guid teamId, [FromBody] string name)
         {
@@ -57,10 +57,24 @@ namespace Hackathon_Jue.Controllers
         }
 
         [HttpGet("user/{name}")]
-        public async Task<IActionResult> IsInvitedTeam([FromRoute] string name)
+        public async Task<IActionResult> IsInvitedTeams([FromRoute] string name)
         {
             return Ok(_context.Teams.Where(q => q.InvitedUsers.Contains(name)).ToList().Select(q => q.Name));
         }
 
+        [HttpGet("chat")]
+        public async Task<IActionResult> GetChat()
+        {
+            return Ok(_context.ChatMessages.ToList());
+        }
+
+        [HttpPost("chat")]
+        public async Task<IActionResult> SendMessage(ChatMessage chatMessage)
+        {
+            chatMessage.TimeStamp = ((DateTimeOffset)DateTime.Now).ToUnixTimeSeconds();
+            _context.ChatMessages.Add(chatMessage);
+            await _context.SaveChangesAsync();
+            return Ok(chatMessage);
+        }
     }
 }
