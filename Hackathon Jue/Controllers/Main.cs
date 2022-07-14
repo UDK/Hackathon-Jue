@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hackathon_Jue.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class MainController : ControllerBase
     {
         private readonly HackathonContext _context;
@@ -25,7 +24,7 @@ namespace Hackathon_Jue.Controllers
         {
             var result = await _context.Teams.AddAsync(newTeam);
             await _context.SaveChangesAsync();
-            return Ok(result);
+            return Ok(newTeam);
         }
 
         [HttpPut("team/{teamId}/invite")]
