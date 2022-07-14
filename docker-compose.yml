@@ -6,35 +6,35 @@ services:
     build:
       context: .
       dockerfile: Hackathon Jue/Dockerfile
-    #links:
-    #  - "db:POSTGRES_DB"
-    #ports:
-    #  - 8080:80
+    links:
+      - "db:POSTGRES_DB"
+    ports:
+      - 8080:80
 
-  #db:
-  #  image: postgres:13.1
-  #  ports:
-  #  - 5432:5432
-  #  environment:
-  #      POSTGRES_DB: "POSTGRES_DB"
-  #      POSTGRES_USER: "POSTGRES_USER"
-  #      POSTGRES_PASSWORD: "POSTGRES_PASSWORD"
-  #  volumes:
-  #  - postgres_database:/var/lib/postgresql/data:Z
+  db:
+    image: postgres:13.1
+    ports:
+    - 5432:5432
+    environment:
+        POSTGRES_DB: "POSTGRES_DB"
+        POSTGRES_USER: "POSTGRES_USER"
+        POSTGRES_PASSWORD: "POSTGRES_PASSWORD"
+    volumes:
+    - postgres_database:/var/lib/postgresql/data:Z
     
-  #pgadmin:
-  #  image: dpage/pgadmin4
-  #  ports:
-  #  - "8081:80"
-  #  environment:
-  #      PGADMIN_DEFAULT_EMAIL: de@admin.ru
-  #      PGADMIN_DEFAULT_PASSWORD: 123qwe456rty
-  #  depends_on:
-  #  - db
-  #  volumes:
-  #  - pgadmin-data:/var/lib/pgadmin
-  #  links:
-  #  - "db:POSTGRES_DB"
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+    - "8081:80"
+    environment:
+        PGADMIN_DEFAULT_EMAIL: de@admin.ru
+        PGADMIN_DEFAULT_PASSWORD: 123qwe456rty
+    depends_on:
+    - db
+    volumes:
+    - pgadmin-data:/var/lib/pgadmin
+    links:
+    - "db:POSTGRES_DB"
 
 volumes:
     pgadmin-data:
