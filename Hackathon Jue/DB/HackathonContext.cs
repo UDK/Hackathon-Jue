@@ -11,6 +11,7 @@ namespace Hackathon_Jue.DB
             Database.EnsureCreated();
         }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
